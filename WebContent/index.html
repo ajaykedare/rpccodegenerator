@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html ng-app="codeGeneratorApp">
+<head>
+    <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="resources/css/app.css">
+    <link rel="stylesheet" href="resources/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources/css/dataTables/jquery.dataTables.min.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script type="text/javascript"
+        src="resources/thirdparty/angularjs/angular.min.js"></script>
+    <script type="text/javascript"
+        src="resources/thirdparty/angularjs/angular-route.min.js"></script>
+    <script type="text/javascript"
+        src="resources/thirdparty/angularjs/angular-animate.min.js"></script>
+    <script type="text/javascript"
+        src="resources/thirdparty/angularjs/angular-sanitize.min.js"></script>          
+    <script type="text/javascript"
+        src="resources/thirdparty/bootstrap/ui-bootstrap-tpls-2.1.4.min.js"></script>
+    <script type="text/javascript"
+        src="resources/thirdparty/jquery/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript"
+        src="resources/thirdparty/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript"
+        src="resources/thirdparty/dataTables/jquery.dataTables.min.js"></script>
+    
+    
+    <script type="text/javascript" src="resources/js/app.js"></script>
+    <script type="text/javascript" src="resources/js/mainservice.js"></script>
+    <script type="text/javascript" src="resources/js/maincontroller.js"></script>
+    <script type="text/javascript" src="resources/js/RequestController.js"></script>
+    
+<meta charset="UTF-8">
+<title>RPC Code Generator TOOL</title>
+</head>
+<body ng-controller="MainCtrl">
+    
+    <header class="navbar navbar-static-top" id="top" role="banner">
+        <div class="container">
+            <header class="navbar navbar-default navbar-fixed-top">
+                <div class="navbar-inner">                  
+                        <div id="headerNameDiv" class="navbar-header col-xs-10" align="Center">          
+                                <h1>RPC Code Generator TOOL</h1>                                                 
+                                              
+                       </div>
+                        <div ng-show="mainService.isUserLoggedIn" class="col-xs-2" style="padding-top: 1.5%;">
+                        
+                        	<div class="btn-group" uib-dropdown uib-keyboard-nav>
+								        <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+								             {{mainService.currentUser.username}}<span style="margin-left:10%;"><i class="fa fa-user"></i></span> <span style="margin-right: 10%;" class="caret"></span>
+								        </button>
+								        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+								            <li role="menuitem" ><a href="#/dashboard">Dashboard</a></li>
+								            <li role="menuitem" ><a ng-click="logout();">Logout</a></li>								            
+								        </ul>
+								    </div>								    
+                                         
+            </div>
+
+            </header>
+            <div class="header-placeholder"></div>
+        </div>
+    </header>
+    
+<div ng-view="" style="margin-bottom:5%"></div>
+
+<footer class="navbar navbar-default navbar-fixed-bottom text-center footer" id="bottom" role="banner"><br/><i>Developed By:</i> Ajay Kedare | Abhishek Ghogare
+<br/>
+</footer>
+
+</body>
+</html>

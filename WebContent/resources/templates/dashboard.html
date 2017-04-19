@@ -1,0 +1,135 @@
+<div class="container" style="margin-left: 30%;">
+<!-- For Student -->
+	<div class="text-center" ng-if="mainService.currentUser.userType == 'student'">
+	
+		<div class="btn-group col-xs-8 col-md-4 text-center">
+			<button type="button" class="btn btn-info btn-block" ng-click="showOpenRequests()">My requests</button>
+			<br/><br/>
+			<button type="button" class="btn btn-warning btn-block" ng-click="createRequestGoToChecklist()">Create a new request</button>	
+		</div>
+	</div>
+
+<!-- For Vendor -->
+	<div class="text-center" ng-if="mainService.currentUser.userType == 'vendor'">
+	
+		<div class="btn-group col-xs-8 col-md-4 text-center">
+			<button type="button" class="btn btn-info btn-block" ng-click="showOpenRequestsForVendor()">Show All Open Requests</button>
+			<br/><br/>
+			<button type="button" class="btn btn-warning btn-block" ng-click="createRequestGoToChecklist()">Create a new request</button>
+			<br/><br/>
+			
+			<div class="row row-list">
+			    <div class="col-xs-8">
+			    	<p class="input-group">
+			          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dataObj.dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+			          <span class="input-group-btn" >
+			            <button type="button" class="btn btn-default" ng-click="open1()"><i class="fa fa-calendar"></i></button>
+			          </span>			          
+			        </p>
+			    </div>			    
+			    <div class="col-xs-4">
+			    	<button type="button" class="btn btn-warning btn-block" ng-click="showOpenRequestsForDate()">Show</button>
+			    </div>
+			</div>  			
+	        <br/><br/>
+	        <div class="row row-list">
+			    <div class="col-xs-8">			    	
+					<div class="btn-group" uib-dropdown uib-keyboard-nav>
+						<button id="simple-btn-keyboard-nav" type="button" class="btn btn-default" uib-dropdown-toggle>
+							<span ng-show="dataObj.hostelNo!=''">{{dataObj.hostelNo}}</span> 
+							<span ng-show="!dataObj.hostelNo">Select Hostel</span>
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="simple-btn-keyboard-nav">
+							<li ng-repeat="hostel in ::mainService.hostelList" role="menuitem" ><a ng-click="dataObj.hostelNo=hostel">{{hostel}}</a></li>
+						</ul>
+					</div>
+			    </div>			    
+			    <div class="col-xs-4">
+			    	<button type="button" class="btn btn-info btn-block" ng-click="showOpenRequestsForHostel()">Show</button>
+			    </div>
+			</div>
+	        <br/><br/> 
+	                
+		</div>		
+	</div>
+
+<!-- For Hostel Sysad -->
+	<div class="text-center" ng-if="mainService.currentUser.userType == 'hostelsysad'">
+	
+		<div class="btn-group col-xs-8 col-md-4 text-center">
+			<button type="button" class="btn btn-info btn-block" ng-click="showApprovalRequestsForSysad()">Show Requests to Approve</button>
+			<br/><br/>
+			<button type="button" class="btn btn-warning btn-block" ng-click="createRequestGoToChecklist()">Create a new request</button>
+			<br/><br/>
+
+			<button type="button" class="btn btn-info btn-block" ng-click="showOpenRequestsForSysad()">Show all open requests for my hostel</button>
+			<br/><br/>	
+			
+			<div class="row row-list">
+			    <div class="col-xs-8">
+			    	<p class="input-group">
+			          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dataObj.dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+			          <span class="input-group-btn" >
+			            <button type="button" class="btn btn-default" ng-click="open1()"><i class="fa fa-calendar"></i></button>
+			          </span>			          
+			        </p>
+			    </div>			    
+			    <div class="col-xs-4">
+			    	<button type="button" class="btn btn-warning btn-block" ng-click="showOpenRequestsForDateForSysad()">Show</button>
+			    </div>
+			</div>  			
+	        <br/><br/>        
+		</div>		
+	</div>
+
+
+	<!-- For Admin -->
+	<div class="text-center" ng-if="mainService.currentUser.userType == 'admin'">
+	
+		<div class="btn-group col-xs-8 col-md-4 text-center">
+			<button type="button" class="btn btn-info btn-block" ng-click="showOpenRequestsForVendor()">Show All Open Requests</button>
+			<br/><br/>
+			<button type="button" class="btn btn-warning btn-block" ng-click="createRequestGoToChecklist()">Create a new request</button>
+			<br/><br/>
+			<button type="button" class="btn btn-info btn-block" ng-click="addHostelSysad()">Add new Hostel Sysad</button>
+			<br/><br/>
+			
+			<div class="row row-list">
+			    <div class="col-xs-8">
+			    	<p class="input-group">
+			          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dataObj.dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+			          <span class="input-group-btn" >
+			            <button type="button" class="btn btn-default" ng-click="open1()"><i class="fa fa-calendar"></i></button>
+			          </span>			          
+			        </p>
+			    </div>			    
+			    <div class="col-xs-4">
+			    	<button type="button" class="btn btn-warning btn-block" ng-click="showOpenRequestsForDate()">Show</button>
+			    </div>
+			</div>  			
+	        <br/><br/>
+	        
+	        <div class="row row-list">
+			    <div class="col-xs-8">
+					<div class="btn-group" uib-dropdown uib-keyboard-nav>
+						<button id="simple-btn-keyboard-nav" type="button" class="btn btn-default" uib-dropdown-toggle>
+							<span ng-show="dataObj.hostelNo!=''">{{dataObj.hostelNo}}</span> 
+							<span ng-show="!dataObj.hostelNo">Select Hostel</span>
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="simple-btn-keyboard-nav">
+							<li ng-repeat="hostel in ::mainService.hostelList" role="menuitem" ><a ng-click="dataObj.hostelNo=hostel">{{hostel}}</a></li>
+						</ul>
+					</div>
+			    </div>			    
+			    <div class="col-xs-4">
+			    	<button type="button" class="btn btn-info btn-block" ng-click="showAllRequestsForHostel()">Show</button>
+			    </div>
+			</div> 			
+	        <br/><br/>         
+		</div>		
+	</div>
+
+
+</div>

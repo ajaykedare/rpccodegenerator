@@ -1,0 +1,111 @@
+body {
+	background-color: #f4f4f4;
+	/*background-image: url("../images/home.jpg");*/
+	background-size: cover;
+	background-repeat: no-repeat;
+	font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	line-height: 1.5em;
+}
+
+a {
+	text-decoration: none;
+}
+
+h1 {
+	font-size: 1em;
+}
+
+h1, p {
+	margin-bottom: 10px;
+}
+
+strong {
+	font-weight: bold;
+}
+
+.uppercase {
+	text-transform: uppercase;
+}
+
+/* ---------- LOGIN ---------- */
+#login {
+	margin: 50px auto;
+	width: 300px;
+}
+
+#signup {
+	margin: 50px auto;
+	width: 300px;
+}
+
+.login {
+	background-color: #e5e5e5;
+	border: none;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	color: #5a5656;
+	font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	height: 50px;
+	outline: none;
+	padding: 0px 10px;
+	width: 280px;
+	-webkit-appearance: none;
+}
+
+.submitbtn {
+	background-color: #008dde;
+	border: none;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	color: #f4f4f4;
+	cursor: pointer;
+	font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+	height: 50px;
+	text-transform: uppercase;
+	width: 300px;
+	-webkit-appearance: none;
+}
+
+#headerNameDiv {
+	/* font-family: cursive; 
+	font-style: italic; */
+	font-size: xx-large;
+	color: crimson;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+#uploadBtnDiv {
+	text-align: center;
+}
+
+.commentDiv {
+	width: 60%;
+}
+
+.poemDivHrTag {
+	margin-bottom: 5%;
+	margin-top: 5%;
+}
+
+.newlineData {
+	white-space: pre-wrap;
+}
+
+/*For DatePicker*/
+.full button span {
+    background-color: limegreen;
+    border-radius: 32px;
+    color: black;
+}
+.partially button span {
+    background-color: orange;
+    border-radius: 32px;
+    color: black;
+  }

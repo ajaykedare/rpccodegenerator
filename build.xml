@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="VendorVisitPortal">
+    <property environment="env"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.7"/>
+    <property name="source" value="1.7"/>
+    <property name="project.name" value="${ant.project.name}" />
+    <property name="project.war" value="${project.name}.war" />
+    <path id="Apache Tomcat v6.0 [Apache Tomcat v6.0].libraryclasspath">
+        <pathelement location="../../tomcat6/lib/servlet-api.jar"/>
+        <pathelement location="../../tomcat6/lib/jasper.jar"/>
+        <pathelement location="../../tomcat6/lib/tomcat-i18n-ja.jar"/>
+        <pathelement location="../../tomcat6/lib/tomcat-coyote.jar"/>
+        <pathelement location="../../tomcat6/lib/tomcat-i18n-fr.jar"/>
+        <pathelement location="../../tomcat6/lib/tomcat-i18n-es.jar"/>
+        <pathelement location="../../tomcat6/lib/catalina.jar"/>
+        <pathelement location="../../tomcat6/lib/jsp-api.jar"/>
+        <pathelement location="../../tomcat6/lib/catalina-tribes.jar"/>
+        <pathelement location="../../tomcat6/lib/jasper-el.jar"/>
+        <pathelement location="../../tomcat6/lib/catalina-ha.jar"/>
+        <pathelement location="../../tomcat6/lib/catalina-ant.jar"/>
+        <pathelement location="../../tomcat6/lib/el-api.jar"/>
+        <pathelement location="../../tomcat6/lib/annotations-api.jar"/>
+        <pathelement location="../../tomcat6/lib/tomcat-dbcp.jar"/>
+        <pathelement location="../../tomcat6/lib/ecj-4.2.2.jar"/>
+    </path>
+    <path id="Web App Libraries.libraryclasspath">
+        <pathelement location="WebContent/WEB-INF/lib/antlr-2.7.6.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/commons-collections-3.1.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/commons-dbcp-1.4.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/commons-logging-api-1.1.1.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/commons-pool-1.6.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/dom4j-1.6.1.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/hibernate3.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/jackson-all-1.9.0.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/jackson-mapper-asl-1.9.13.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/javassist-3.12.0.GA.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/json-simple-1.1.1.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/jstl-1.2.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/jta-1.1.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/mysql-connector-java-5.1.39-bin.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/slf4j-api-1.6.1.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/spring-aop-3.2.4.RELEASE.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/spring-beans-3.2.4.RELEASE.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/spring-context-3.2.4.RELEASE.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/spring-core-3.2.4.RELEASE.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/spring-expression-3.2.4.RELEASE.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/spring-instrument-3.2.4.RELEASE.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/spring-jdbc-3.2.4.RELEASE.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/spring-jms-3.2.4.RELEASE.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/spring-orm-3.2.4.RELEASE.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/spring-oxm-3.2.4.RELEASE.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/spring-struts-3.2.4.RELEASE.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/spring-test-3.2.4.RELEASE.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/spring-tx-3.2.4.RELEASE.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/spring-web-3.2.4.RELEASE.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/spring-webmvc-3.2.4.RELEASE.jar"/>
+    </path>
+    <path id="EAR Libraries.libraryclasspath"/>
+    <path id="VendorVisitPortal.classpath">
+        <pathelement location="build/classes"/>
+        <path refid="Apache Tomcat v6.0 [Apache Tomcat v6.0].libraryclasspath"/>
+        <path refid="Web App Libraries.libraryclasspath"/>
+        <path refid="EAR Libraries.libraryclasspath"/>
+        <pathelement location="../../my area/spring jars/commons-logging-api-1.1.1.jar"/>
+        <pathelement location="../../my area/spring jars/jackson-all-1.9.0.jar"/>
+        <pathelement location="../../my area/spring jars/jackson-mapper-asl-1.9.13.jar"/>
+        <pathelement location="../../my area/spring jars/json-simple-1.1.1.jar"/>
+        <pathelement location="../../my area/spring jars/jstl-1.2.jar"/>
+        <pathelement location="../../my area/spring jars/spring-aop-3.2.4.RELEASE.jar"/>
+        <pathelement location="../../my area/spring jars/spring-beans-3.2.4.RELEASE.jar"/>
+        <pathelement location="../../my area/spring jars/spring-context-3.2.4.RELEASE.jar"/>
+        <pathelement location="../../my area/spring jars/spring-core-3.2.4.RELEASE.jar"/>
+        <pathelement location="../../my area/spring jars/spring-expression-3.2.4.RELEASE.jar"/>
+        <pathelement location="../../my area/spring jars/spring-instrument-3.2.4.RELEASE.jar"/>
+        <pathelement location="../../my area/spring jars/spring-jdbc-3.2.4.RELEASE.jar"/>
+        <pathelement location="../../my area/spring jars/spring-jms-3.2.4.RELEASE.jar"/>
+        <pathelement location="../../my area/spring jars/spring-orm-3.2.4.RELEASE.jar"/>
+        <pathelement location="../../my area/spring jars/spring-oxm-3.2.4.RELEASE.jar"/>
+        <pathelement location="../../my area/spring jars/spring-struts-3.2.4.RELEASE.jar"/>
+        <pathelement location="../../my area/spring jars/spring-test-3.2.4.RELEASE.jar"/>
+        <pathelement location="../../my area/spring jars/spring-tx-3.2.4.RELEASE.jar"/>
+        <pathelement location="../../my area/spring jars/spring-web-3.2.4.RELEASE.jar"/>
+        <pathelement location="../../my area/spring jars/spring-webmvc-3.2.4.RELEASE.jar"/>
+        <pathelement location="../../my area/hibernatejars/antlr-2.7.6.jar"/>
+        <pathelement location="../../my area/hibernatejars/commons-collections-3.1.jar"/>
+        <pathelement location="../../my area/hibernatejars/dom4j-1.6.1.jar"/>
+        <pathelement location="../../my area/hibernatejars/hibernate3.jar"/>
+        <pathelement location="../../my area/hibernatejars/hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
+        <pathelement location="../../my area/hibernatejars/javassist-3.12.0.GA.jar"/>
+        <pathelement location="../../my area/hibernatejars/jta-1.1.jar"/>
+        <pathelement location="../../my area/hibernatejars/mysql-connector-java-5.1.39-bin.jar"/>
+        <pathelement location="../../my area/hibernatejars/slf4j-api-1.6.1.jar"/>
+        <pathelement location="../../my area/hibernatejars/commons-dbcp-1.4.jar"/>
+        <pathelement location="../../my area/hibernatejars/commons-pool-1.6.jar"/>
+    </path>
+    <target name="init">
+        <mkdir dir="build/classes"/>
+        <copy includeemptydirs="false" todir="build/classes">
+            <fileset dir="src">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="build/classes"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="build/classes" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="VendorVisitPortal.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+              	<target name="war" description="Bundles the application as a WAR file" depends="clean, build">
+              	    <mkdir dir="WebContent/WEB-INF/classes"/>
+              	     
+              	    <copy includeemptydirs="false" todir="WebContent/WEB-INF/classes">
+              	            <fileset dir="build/classes">
+              	            <include name="**/*.class"/>
+              	            </fileset>
+              	    </copy>
+              	     
+              	    <war destfile="VVP.war"
+              	        basedir="WebContent"
+              	        needxmlfile="false">
+              	    </war>
+              	</target>
+    <target name="LdapAuth">
+        <java classname="rpccodegenerator.authentication.LdapAuth" failonerror="true" fork="yes">
+            <classpath refid="VendorVisitPortal.classpath"/>
+        </java>
+    </target>
+</project>
