@@ -1,45 +1,22 @@
 <div class="container">
-	<div style="padding-bottom: 50px">
-		<table style="width: 100%">
-			<tr ng-show="message!=''" >
-				<td colspan="2" style="width: 100%; padding: 10px;">
-					<div  class="alert alert-info" role="alert">{{message}}</div>
-				</td>
-			</tr>
-			<tr>
-				<td style="width: 45%; padding-left: 40px; vertical-align: top">
-					<div id="login">
-						<h1>
-							<strong>Welcome.</strong> Please login.
-						</h1>
-						
-							<form name="form" ng-submit="generateCode()" role="form">
-						        <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
-						            <label for="username">Username</label>
-						            <input type="text" name="username" id="username" class="form-control" ng-model="user.username" required />
-						            <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
-						        </div>
-						        <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
-						            <label for="password">Password</label>
-						            <input type="password" name="password" id="password" class="form-control" ng-model="user.password" required />
-						            <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
-						        </div>
-						        <div class="form-actions">
-						            <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Login</button>
-						        </div>
-						    </form>
-						    
-						    
-						    <canvas id="canvas" width="2100" height="900" 
-							    style="border: 1px solid #d3d3d3;">
-							  <draw-circle x="500" y="500"></draw-circle>
-							  <draw-circle x="200" y="500"></draw-circle>
-							</canvas>
-						
+	<div id="leftPanel" class="panel panel-default" style="width:25%;float:left;padding:5px;height:100%">
 
-					</div> <!-- end login -->
-				</td>
-			</tr>
-		</table>
+		<canvas id="canvas" width="200" height="200"
+			style="border: 1px solid #d3d3d3;">
+			<draw-circle x="50" y="50"></draw-circle>
+			<draw-circle x="50" y="50"></draw-circle>
+		</canvas>
+		
+		<div> </div>
 	</div>
+	
+	
+	<div id="mainPanel" style="width:73%;float:left;padding:5px;height:100%">
+	<canvas id="mycanvas" style="border: 1px gray solid; float: left" width="600" height="400" ></canvas>
+		<div class="col-xs-8 text-center">
+			<button type="button" class="btn btn-primary btn-block" ng-click="drawCurve()">Draw Curve</button>
+		</div>	
+	</div>
+	
+	
 </div>

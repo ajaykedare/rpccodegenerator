@@ -1,4 +1,9 @@
 package rpccodegenerator.controllers;
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -17,26 +22,21 @@ public class CodeGeneratorController {
 	@Autowired
 	CodeGeneratorService codeGeneratorService;	
 
-	/**
-	 * @param user
-	 * @return user object in json
-	 * 
-	 * Desc: Gets the method signature and generates the code at a location
-	 */
 	@RequestMapping(value="generateCode", method=RequestMethod.POST,headers="Accept=application/json")
 	public @ResponseBody String generateCode( @RequestBody User user ) {
 		return codeGeneratorService.generateCode(user);		
 	}
 	
-	/**
-	 * @param user
-	 * @return user object in json
-	 * 
-	 * Desc: Adds the user against the LDAP authentication
-	 */
-	@RequestMapping(value="addHostelSysad", method=RequestMethod.POST,headers="Accept=application/json")
-	public @ResponseBody String addHostelSysad( @RequestBody User user ) {
-		return codeGeneratorService.addHostelSysad(user);		
+	@RequestMapping(value="saveModRequests", method=RequestMethod.POST,headers="Accept=application/json")
+	public @ResponseBody String savepoems( HttpServletRequest req, HttpServletResponse res ) {
+		String jsonString = null;
+		try {
+			jsonString = req.getReader().readLine();
+			System.out.println("Request object received : "+jsonString);
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+		return "Success";
 	}
 
 	

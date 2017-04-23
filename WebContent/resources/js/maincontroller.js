@@ -37,6 +37,69 @@ codeGeneratorApp.controller("MainCtrl", function($scope, $http, $location, $q, M
 	$scope.mainService=MainService;
 	$scope.user={};
 	$scope.message="";
+	$scope.data={};
+	$scope.data= {
+			  "methods": [
+				    {
+				      "methodname": "addition",
+				      "parameters" : [
+				          {
+				            "name":"var_a",
+				            "type":"int"
+				          },
+				          {
+				            "name":"var_b",
+				            "type":"int"
+				          }
+				        ],
+				        "returntype":"int"
+				    },
+				    {
+				      "methodname": "delete",
+				      "parameters" : [
+				          {
+				            "name":"varb",
+				            "type":"int"
+				          }
+				        ],
+				        "returntype":"int"
+				    }
+				    
+				  ],
+				  "canvasdata": {
+				    "rectangles": [
+				      {
+				        "x": 50,
+				        "y": 200,
+				        "l": 50,
+				        "b": 50
+				      },
+				      {
+				        "x": 200,
+				        "y": 200,
+				        "l": 50,
+				        "b": 50
+				      }
+				    ],
+				    "lines": [
+				      {
+				        "cpx": 150,
+				        "cpy": 150,
+				        "epx": 225,
+				        "epy": 225
+				      },
+				      {
+				        "cpx": 150,
+				        "cpy": 100,
+				        "epx": 225,
+				        "epy": 225
+				      }
+				    ]
+				  }
+				}
+	$scope.data.canvasdata={"rectangles":[{"x":50,"y":200,"l":50,"b":50},{"x":200,"y":200,"l":50,"b":50}],"lines":[{"cpx":150,"cpy":150,"epx":225,"epy":225},{"cpx":150,"cpy":100,"epx":225,"epy":225}]};
+	
+	
 				
 	//TODO: Add any initial checking code here, 
 	if(!$scope.mainService.isInitialised)
@@ -56,7 +119,54 @@ codeGeneratorApp.controller("MainCtrl", function($scope, $http, $location, $q, M
         }*/
 	}
 
+	$scope.drawCurve = function() {
+		
+		$scope.drawCanvas();
+
+
+//		var canvas = document.getElementById('mycanvas');
+//		var context = canvas.getContext('2d');
+//
+//		// setup
+////		canvas.width = 600;
+////		canvas.height = 400;
+//		
+//		// Make it visually fill the positioned parent
+//		  canvas.style.width ='100%';
+//		  canvas.style.height='100%';
+//		  // ...then set the internal size to match
+//		  canvas.width  = canvas.offsetWidth;
+//		  canvas.height = canvas.offsetHeight;
+//		context.globalAlpha = 1.0;
+//		context.beginPath();
+//		context.moveTo(50, 50);
+//		//   context.lineTo(100, 100);
+//		context.quadraticCurveTo(100, 30, 100, 100);
+//
+//		context.strokeStyle = "black";
+//		context.stroke();
+	};
 	
+	$scope.drawCanvas = function(){
+		var canvas = document.getElementById('mycanvas');
+		var context = canvas.getContext('2d');
+		context.globalAlpha = 1.0;
+		context.beginPath();
+		
+		angular.forEach($scope.data.canvasdata.rectangles, function(value, key){
+			context.beginPath();
+			context.fillStyle = 'blue';
+			context.fillRect(value.x, value.y, value.l, value.b);
+		});
+		
+		angular.forEach($scope.data.canvasdata.lines, function(value, key){
+			context.beginPath();
+			context.moveTo(75, 225);
+			context.quadraticCurveTo(value.cpx, value.cpy, value.epx, value.epy);
+			context.strokeStyle = "black";
+			context.stroke();
+		});
+	}
 	$scope.generateCode = function(){
 			
 		$scope.message="";
@@ -89,6 +199,7 @@ codeGeneratorApp.controller("MainCtrl", function($scope, $http, $location, $q, M
 		});
 	};
 
+	
 	
 	$scope.logout = function(){
 		$location.path('/');
