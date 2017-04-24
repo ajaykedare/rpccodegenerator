@@ -22,21 +22,25 @@ public class CodeGeneratorController {
 	@Autowired
 	CodeGeneratorService codeGeneratorService;	
 
-	@RequestMapping(value="generateCode", method=RequestMethod.POST,headers="Accept=application/json")
-	public @ResponseBody String generateCode( @RequestBody User user ) {
-		return codeGeneratorService.generateCode(user);		
+	@RequestMapping(value="generateCode1", method=RequestMethod.POST,headers="Accept=application/json")
+	public @ResponseBody String generateCode1( @RequestBody User user ) {
+		return codeGeneratorService.generateCode1(user);		
 	}
 	
-	@RequestMapping(value="saveModRequests", method=RequestMethod.POST,headers="Accept=application/json")
-	public @ResponseBody String savepoems( HttpServletRequest req, HttpServletResponse res ) {
+	@RequestMapping(value="generateCode", method=RequestMethod.POST,headers="Accept=application/json")
+	public @ResponseBody String generateCode( HttpServletRequest req, HttpServletResponse res ) {
 		String jsonString = null;
+		String returnString="{\"result\": \"Fail\"}";
 		try {
 			jsonString = req.getReader().readLine();
 			System.out.println("Request object received : "+jsonString);
+			// Code to Generate RPC Files
+			return codeGeneratorService.generateCode(jsonString);	
+			
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
-		return "Success";
+		return returnString;
 	}
 
 	

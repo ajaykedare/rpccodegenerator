@@ -1,0 +1,45 @@
+<div class="modal-header" style="height: 50px;">
+			<h4 class="modal-title col-lg-12 text-center" style="font-family: monospace;" id="myModalLabel">Add Method</h4>
+		</div>
+		<div class="modal-body">
+		
+			<form name="methodform" novalidate role="form">
+				<div class="form-group" ng-class="{ 'has-error': form.methodname.$dirty && form.methodname.$error.required }">
+					<label for="methodname">Method Name</label>
+					<input type="text" name="methodname" id="methodname" class="form-control" ng-model="newMethod.methodname" required />
+					<span ng-show="form.methodname.$dirty && form.methodname.$error.required" class="help-block">Methodname is required</span>
+				</div>
+				
+				<div class="form-group" ng-class="{ 'has-error': form.returntype.$dirty && form.returntype.$error.required }">
+					<label for="returntype">Return Type</label>
+					<input type="text" name="returntype" id="returntype" class="form-control" ng-model="newMethod.returntype" required />
+					<span ng-show="form.returntype.$dirty && form.returntype.$error.required" class="help-block">Return Type is required</span>
+				</div>
+				
+				<div ng-repeat="item in newMethod.parameters track by $index">
+			        <input type="text" placeholder="{{item.namePlaceholder}}" ng-model="item.name">
+			        <input type="text" placeholder="{{item.typePlaceholder}}" ng-model="item.type">			        
+			        <button type="button" class="btn btn-default btn-sm" ng-click="removeParameter($index)">
+				        <span class="fa fa-minus-square-o"></span> REMOVE
+				      </button>
+			        
+			      </div> 
+			      <button class="btn btn-default btn-sm" ng-click="addParameter()"> 
+			      		<span class="fa fa-plus-square-o"></span>New Parameter
+			      </button>
+				
+				
+				<div class="form-actions col-md-12 text-center">
+						<button ng-disabled="methodform.$invalid" ng-click="addMethod() class="btn btn-primary">Submit</button>
+				</div>
+			</form>				
+				
+			
+		</div>
+		<div class="modal-footer" style="margin-top: 5%;">
+			<div class="form-actions col-md-12">
+				<!-- <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary col-md-6 pull-right text-center" style="margin-right: 25%;"">Submit</button> -->
+				<button class="btn btn-warning" ng-click="cancel()">Cancel</button>						            
+			</div>
+			
+</div>

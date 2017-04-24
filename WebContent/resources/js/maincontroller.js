@@ -118,33 +118,32 @@ codeGeneratorApp.controller("MainCtrl", function($scope, $http, $location, $q, M
         	$location.path('/');
         }*/
 	}
+	
+	$scope.addMethod = function() {
+		
+		$scope.newMethod = {"parameters":[]};
+		$scope.uibModalInstance = $uibModal.open({
+		        templateUrl: 'resources/templates/addMethodModal.html',
+		        controller: 'ModalCtrl',
+		        scope: $scope
+		 });
+	};
+	
+	
+	$scope.deleteMethod = function() {
+		
+		$scope.methodToDelete = {};
+		$scope.uibModalInstance = $uibModal.open({
+		        templateUrl: 'resources/templates/deleteMethodModal.html',
+		        controller: 'ModalCtrl',
+		        scope: $scope
+		 });
+	};
+	
 
 	$scope.drawCurve = function() {
 		
 		$scope.drawCanvas();
-
-
-//		var canvas = document.getElementById('mycanvas');
-//		var context = canvas.getContext('2d');
-//
-//		// setup
-////		canvas.width = 600;
-////		canvas.height = 400;
-//		
-//		// Make it visually fill the positioned parent
-//		  canvas.style.width ='100%';
-//		  canvas.style.height='100%';
-//		  // ...then set the internal size to match
-//		  canvas.width  = canvas.offsetWidth;
-//		  canvas.height = canvas.offsetHeight;
-//		context.globalAlpha = 1.0;
-//		context.beginPath();
-//		context.moveTo(50, 50);
-//		//   context.lineTo(100, 100);
-//		context.quadraticCurveTo(100, 30, 100, 100);
-//
-//		context.strokeStyle = "black";
-//		context.stroke();
 	};
 	
 	$scope.drawCanvas = function(){
@@ -169,91 +168,31 @@ codeGeneratorApp.controller("MainCtrl", function($scope, $http, $location, $q, M
 	}
 	$scope.generateCode = function(){
 			
-		$scope.message="";
+		$scope.data="";
 
 		var result = $http({
 			method : 'POST',
 			url : 'generateCode',
-			data : JSON.stringify($scope.user),			
+			data : angular.toJson($scope.data),
 		});
 		result.success(function(data,status) {
-			if(!data.result)
+			if(data.result=="Success")
 		    {
-		    	$location.path('/dashboard');
-		    	$scope.mainService.currentUser=data;
-		    	$scope.mainService.isUserLoggedIn=true;
-		    	$sessionService.setObject("user",data);
+		    	alert('Method generated successfully !');
+		    	$uibModalInstance.close();
 		    }
 		    else
 		    {
-		    	if (data.errorMsg == "Authentication Failed"){
-		    		$scope.message="Wrong username or password, please try again !";	
-		    	} else if(data.errorMsg == "User not found") {
-		    		$scope.message="User Not Found!";	
-		    	}
+		    	console.log('Internal server error occured while generating code with status :'+status);
 		    	
 		    }
 		  });
 		result.error(function (data, status){
-			console.log('Error Occured with status :'+status);
-		});
-	};
-
+			console.log('Error Occured in AJAX call with status :'+status);
+		});	
+	};	
 	
 	
-	$scope.logout = function(){
-		$location.path('/');
-		$sessionService.remove("user")
-		$scope.mainService.currentUser=null;
-		$scope.mainService.isUserLoggedIn=false;
-	};
-	
-	
-	/***********************************************************************************
-						Dashboard Controller
-	************************************************************************************/
-
-	$scope.showOpenRequests = function (){
-		
-		MainService.showOpenRequests().then(
-            function (result) {                
-                $scope.mainService.userRequests = result;
-                $location.path('/openrequests');
-            },
-            function (error) {
-                console.log(error.statusText);
-            }
-        );
-	}
-	
-	
-	//MODAL WINDOW
-	$scope.showCurrentRequestOnModalForVendor = function(req) {
-		
-	  $scope.currentRequestToEdit = req;
-	  $scope.currentRequestToEditIndex = $scope.mainService.userRequests.indexOf(req);
-	  $scope.changeStatusTo = req.status;
-	  $scope.changeVendorRemarksTo = req.vendorRemarks;
-      $scope.uibModalInstance = $uibModal.open({
-        templateUrl: 'resources/templates/requestModal.html',
-        controller: 'ModalCtrl',
-        scope: $scope
-      })
-    };
-
-    $scope.showCurrentRequestOnModalForHostelSysad = function(req) {
-		
-	  $scope.currentRequestToEdit = req;
-	  $scope.currentRequestToEditIndex = $scope.mainService.userRequests.indexOf(req);
-	  $scope.changeStatusTo = req.status;
-	  $scope.changeHostelSysadRemarksTo = req.hostelSysadRemarks;
-	  $scope.changeVendorRemarksTo = req.vendorRemarks;
-      $scope.uibModalInstance = $uibModal.open({
-        templateUrl: 'resources/templates/requestModalSysad.html',
-        controller: 'ModalCtrl',
-        scope: $scope
-      })
-    };
 	
 });
 
@@ -262,60 +201,37 @@ codeGeneratorApp.controller("ModalCtrl", function($scope,  $http, $uibModalInsta
 	$scope.cancel = function() {
 	    $uibModalInstance.dismiss();
 	};
-	 
-	$scope.save = function() {
-		$scope.mainService.userRequests[$scope.currentRequestToEditIndex].status = $scope.changeStatusTo;
-		$scope.mainService.userRequests[$scope.currentRequestToEditIndex].vendorRemarks = $scope.changeVendorRemarksTo;
-		$scope.mainService.userRequests[$scope.currentRequestToEditIndex].isChanged = true;
-	    alert('Saved Req Id:'+ $scope.mainService.userRequests[$scope.currentRequestToEditIndex].id);
-	    $uibModalInstance.close();
-	};
 	
-	$scope.changeStatus = function(st) {
-		$scope.changeStatusTo = st;		
-	 }; 
+	$scope.addParameter = function () {
+		$scope.newMethod.parameters.push({ 
+          name: "",
+          type: "",
+          namePlaceholder: "Enter Parameter name",
+          typePlaceholder: "Enter Parameter type"
+        });
+		alert("added parameter")
+      };
+      
+      $scope.removeParameter = function(idx) {
+    	  $scope.newMethod.parameters.splice(idx, 1);
+      };
+      
+      $scope.addMethod = function() {
+  		
+  		$scope.data.methods.push($scope.newMethod)
+  		alert("New Method Object :"+ angular.toJson($scope.newMethod));
+  		alert("Old global object :" + angular.toJson($scope.data));
+  		
+  		$uibModalInstance.close();
+  	};
+  	
+  	$scope.deleteMethod = function() {
+  		alert("Method to delete is : "+ angular.toJson($scope.methodToDelete));
+  		
+  		$uibModalInstance.close();
+  	
+  	};
+	
 
-	$scope.approveRequest = function () {
-		$scope.mainService.userRequests[$scope.currentRequestToEditIndex].status = 'OPEN';
-		$scope.mainService.userRequests[$scope.currentRequestToEditIndex].hostelSysadRemarks = $scope.changeHostelSysadRemarksTo;
-		$scope.mainService.userRequests[$scope.currentRequestToEditIndex].isChanged = true;
-	    alert('Approved Req Id :'+ $scope.mainService.userRequests[$scope.currentRequestToEditIndex].id);
-	    $uibModalInstance.close();
-	}
-
-	$scope.rejectRequest = function () {
-		$scope.mainService.userRequests[$scope.currentRequestToEditIndex].status = 'REJECT';
-		$scope.mainService.userRequests[$scope.currentRequestToEditIndex].hostelSysadRemarks = $scope.changeHostelSysadRemarksTo;
-		$scope.mainService.userRequests[$scope.currentRequestToEditIndex].isChanged = true;
-	    alert('Rejected Req Id'+ $scope.mainService.userRequests[$scope.currentRequestToEditIndex].id);
-	    $uibModalInstance.close();
-	};
-
-	$scope.addHostelSysad = function () {
-		
-		$scope.newSysadUser.userType="hostelsysad";	
-
-		var result = $http({
-			method : 'POST',
-			url : 'addHostelSysad',
-			data : angular.toJson($scope.newSysadUser),
-		});
-		result.success(function(data,status) {
-			if(data.result=="Success")
-		    {
-		    	//$location.path('/dashboard');
-		    	alert('Hostel Sysad Added Successfuly !');
-		    	$uibModalInstance.close();
-		    }
-		    else
-		    {
-		    	console.log('Internal server error occured while adding hostel sysad with status :'+status);
-		    	
-		    }
-		  });
-		result.error(function (data, status){
-			console.log('Error Occured in AJAX call with status :'+status);
-		});	
-	};
 	
 });
