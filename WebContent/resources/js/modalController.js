@@ -39,9 +39,8 @@ codeGeneratorApp.controller("ModalCtrl", function($scope,  $http, $uibModalInsta
       $scope.addMethod = function() {    	
   		$scope.data.methods.push($scope.newMethod);
   		$sessionService.setObject("data",$scope.data);
-  		$scope.setLines();
+  		$scope.setLines(); 		
   		
-  		alert(angular.toJson($scope.data));
   		$uibModalInstance.close();
   	};
   	
@@ -49,13 +48,11 @@ codeGeneratorApp.controller("ModalCtrl", function($scope,  $http, $uibModalInsta
   		$scope.newCustomStructureType.type="struct";
   		$scope.data.data_structures.push($scope.newCustomStructureType);  		
   		$sessionService.setObject("data",$scope.data);
-  		$scope.setLines();
-  		alert(angular.toJson($scope.data));
+  		$scope.setLines();  		
   		$uibModalInstance.close();
 	};
   	
-  	$scope.deleteMethod = function() {
-  		alert("Method to delete is : "+ angular.toJson($scope.methodToDelete) +"DS :\n" +$scope.customStructureTypeToDelete);
+  	$scope.deleteMethod = function() { 		
   		
   		for (var i = $scope.data.methods.length - 1; i >= 0; i--) {
   		    if ($scope.data.methods[i].methodname == $scope.methodToDelete.methodname) {
@@ -63,12 +60,14 @@ codeGeneratorApp.controller("ModalCtrl", function($scope,  $http, $uibModalInsta
   		    }
   		}
   		
-  		for (var i = $scope.data.methods.length - 1; i >= 0; i--) {
+  		
+  		for (var i = $scope.data.data_structures.length - 1; i >= 0; i--) {
   		    if ($scope.data.data_structures[i].name == $scope.customStructureTypeToDelete.name) {
   		    	$scope.data.data_structures.splice(i, 1);
   		    }
   		}
-  		$sessionService.setObject("data",$scope.data);
+  		$scope.setLines();
+  		$sessionService.setObject("data",$scope.data);  		
   		$uibModalInstance.close();  	
   	};	
 });

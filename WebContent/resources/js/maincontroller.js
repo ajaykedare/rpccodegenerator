@@ -40,7 +40,7 @@ codeGeneratorApp.controller("MainCtrl", function($scope, $http, $location, $q, M
 	
 	
 				
-	//TODO: Add any initial checking code here, 
+	//Add any initial checking code here, 
 	if(!$scope.mainService.isInitialised)
 	{
 		MainService.isInitialised=true;
@@ -48,7 +48,7 @@ codeGeneratorApp.controller("MainCtrl", function($scope, $http, $location, $q, M
 		if(!$sessionService.getObject("data")) {
 			
 			$sessionService.setObject("data",$scope.templateData);
-			$scope.data=$sessionService.getObject("data");
+			$scope.data=$sessionService.getObject("data");			
 			
 		} else {			
 			$scope.data=$sessionService.getObject("data");
@@ -73,14 +73,14 @@ codeGeneratorApp.controller("MainCtrl", function($scope, $http, $location, $q, M
 	};	
 	
 	$scope.setLines = function() {
-		$scope.data.line=[];
+		$scope.data.canvasdata.lines=[];
   		for (var i = 0; i<$scope.data.methods.length; i++) {
   			line = {};
   	  		line.cpx=300;
-  	  		line.cpy = (400/($scope.data.methods.length+1))*(i+1);
+  	  		line.cpy = Math.round((400/($scope.data.methods.length+1))*(i+1));
   	  		line.epx=525;
   	  		line.epy=200;
-  	  		$scope.data.line.push(line); 	  		
+  	  		$scope.data.canvasdata.lines.push(line); 	  		
   		}
   		
   		$scope.drawCanvas();
@@ -111,6 +111,9 @@ codeGeneratorApp.controller("MainCtrl", function($scope, $http, $location, $q, M
 	$scope.drawCanvas = function(){
 		var canvas = document.getElementById('mycanvas');
 		var context = canvas.getContext('2d');
+		
+		context.clearRect(0, 0, canvas.width, canvas.height);
+		
 		context.globalAlpha = 1.0;
 		context.beginPath();
 		
@@ -122,15 +125,14 @@ codeGeneratorApp.controller("MainCtrl", function($scope, $http, $location, $q, M
 		
 		angular.forEach($scope.data.canvasdata.lines, function(value, key){
 			context.beginPath();
-			context.moveTo(75, 225);
+			context.moveTo(75, 200);
 			context.quadraticCurveTo(value.cpx, value.cpy, value.epx, value.epy);
 			context.strokeStyle = "black";
 			context.stroke();
 		});
 	}
 	
-	$scope.generateMethod = function(){
-			
+	$scope.generateMethod = function(){		
 		
 		var result = $http({
 			method : 'POST',
@@ -140,8 +142,7 @@ codeGeneratorApp.controller("MainCtrl", function($scope, $http, $location, $q, M
 		result.success(function(data,status) {
 			if(data.result=="Success")
 		    {
-		    	alert('Method generated successfully Stored at \n!'+data.path);
-		    	$uibModalInstance.close();
+		    	alert('Method generated successfully Stored at /home/dexter/generated/\n!');		    	
 		    }
 		    else
 		    {

@@ -7,12 +7,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import rpccodegenerator.beans.User;
 import rpccodegenerator.services.CodeGeneratorService;
 
 @Controller
@@ -21,11 +19,7 @@ public class CodeGeneratorController {
 
 	@Autowired
 	CodeGeneratorService codeGeneratorService;	
-
-	@RequestMapping(value="generateCode1", method=RequestMethod.POST,headers="Accept=application/json")
-	public @ResponseBody String generateCode1( @RequestBody User user ) {
-		return codeGeneratorService.generateCode1(user);		
-	}
+	
 	
 	@RequestMapping(value="generateCode", method=RequestMethod.POST,headers="Accept=application/json")
 	public @ResponseBody String generateCode( HttpServletRequest req, HttpServletResponse res ) {

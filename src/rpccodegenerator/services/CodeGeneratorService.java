@@ -1,23 +1,22 @@
 package rpccodegenerator.services;
 
-import org.codehaus.jackson.map.ObjectMapper;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.xml.XmlBeanFactory;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-import org.springframework.stereotype.Component;
-
-import rpccodegenerator.beans.User;
-import rpccodegenerator.dao.UserDao;
-import rpccodegenerator.rpcgenerator.LdapAuth;
-
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.json.*;
-
-import org.kamranzafar.jtar.*;
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+import org.kamranzafar.jtar.TarEntry;
+import org.kamranzafar.jtar.TarOutputStream;
+import org.springframework.stereotype.Component;
 
 
 class StructMember {
@@ -272,17 +271,8 @@ class rpc_generator {
 
 
 @Component("codeGeneratorService")
-public class CodeGeneratorService {
-	
+public class CodeGeneratorService {	
 		
-		public String generateCode1( User user ) {
-		String returnString="{\"result\": \"Success\"}";
-		
-		
-		
-		return returnString;				
-	}
-	
 	
 	public String generateCode( String jsonData ) {
 		String returnString="{\"result\": \"Success\"}";
