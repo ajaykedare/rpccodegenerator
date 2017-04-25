@@ -1,7 +1,9 @@
 <div class="modal-header" style="height: 50px;">
-			<h4 class="modal-title col-lg-12 text-center" style="font-family: monospace;" id="myModalLabel">Add Method</h4>
+			<h4 class="modal-title col-lg-12 text-center" style="font-family: monospace;" id="myModalLabel">Delete Method/Custom Structure</h4>
 		</div>
 		<div class="modal-body">
+		
+			<div ng-if="data.methods.length!=0 || && data.data_structures.length !=0" >
 		
 			<form name="form" novalidate role="form">			
 				
@@ -17,8 +19,26 @@
 								 <li ng-repeat="method in ::data.methods" role="menuitem" ><a ng-click="methodToDelete.methodname=method.methodname">{{method.methodname}}</a></li>
 							</ul>
 						</div>
-						<span ng-show="form.hostelNo.$dirty && form.hostelNo.$error.required" class="help-block">Hostel No is required</span>
-				</div>		
+						<span ng-show="form.methodName.$dirty && form.hostelNo.$error.required" class="help-block">Please select Method</span>
+				</div>
+				
+				<br/> <br/>
+				
+				<div class="form-group" ng-class="{ 'has-error': form.methodName.$dirty && form.methodName.$error.required }">
+					  <label for="dsName" class="col-lg-2 control-label">Custom Structure Name:</label>
+					  <div class="btn-group" uib-dropdown uib-keyboard-nav>
+					  		<button id="simple-btn-keyboard-nav" type="button" class="btn btn-default" uib-dropdown-toggle>
+								<span ng-show="customStructureTypeToDelete.name!=''">{{customStructureTypeToDelete.name}}</span> 
+								<span ng-show="!customStructureTypeToDelete.name">Select Structure Name</span>
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="simple-btn-keyboard-nav"> 
+								 <li ng-repeat="datastructure in ::data.data_structures" role="menuitem" ><a ng-click="customStructureTypeToDelete.name=datastructure.name">{{datastructure.name}}</a></li>
+							</ul>
+						</div>
+						<span ng-show="form.methodName.$dirty && form.methodName.$error.required" class="help-block">Please select Method</span>
+						<span ng-show="form.dsName.$dirty && form.dsName.$error.required" class="help-block">Please select Data Structure Name</span>
+				</div>
 				
 				
 				
@@ -27,7 +47,10 @@
 				</div>
 			</form>				
 				
-			
+			</div>
+			<div ng-if="data.methods.length==0 && data.data_structures.length ==0">
+					<div style="text-align: center; margin-bottom: 1%;"> There are no methods to delete.</div>
+			</div>
 		</div>
 		<div class="modal-footer" style="margin-top: 5%;">
 			<div class="form-actions col-md-12">

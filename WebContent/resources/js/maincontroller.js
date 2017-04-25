@@ -35,69 +35,8 @@ codeGeneratorApp.factory('$sessionService',['$window', function($window){
 
 codeGeneratorApp.controller("MainCtrl", function($scope, $http, $location, $q, MainService, $uibModal,$sessionService) {
 	$scope.mainService=MainService;
-	$scope.user={};
-	$scope.message="";
-	$scope.data={};
-	$scope.data= {
-			  "methods": [
-				    {
-				      "methodname": "addition",
-				      "parameters" : [
-				          {
-				            "name":"var_a",
-				            "type":"int"
-				          },
-				          {
-				            "name":"var_b",
-				            "type":"int"
-				          }
-				        ],
-				        "returntype":"int"
-				    },
-				    {
-				      "methodname": "delete",
-				      "parameters" : [
-				          {
-				            "name":"varb",
-				            "type":"int"
-				          }
-				        ],
-				        "returntype":"int"
-				    }
-				    
-				  ],
-				  "canvasdata": {
-				    "rectangles": [
-				      {
-				        "x": 50,
-				        "y": 200,
-				        "l": 50,
-				        "b": 50
-				      },
-				      {
-				        "x": 200,
-				        "y": 200,
-				        "l": 50,
-				        "b": 50
-				      }
-				    ],
-				    "lines": [
-				      {
-				        "cpx": 150,
-				        "cpy": 150,
-				        "epx": 225,
-				        "epy": 225
-				      },
-				      {
-				        "cpx": 150,
-				        "cpy": 100,
-				        "epx": 225,
-				        "epy": 225
-				      }
-				    ]
-				  }
-				}
-	$scope.data.canvasdata={"rectangles":[{"x":50,"y":200,"l":50,"b":50},{"x":200,"y":200,"l":50,"b":50}],"lines":[{"cpx":150,"cpy":150,"epx":225,"epy":225},{"cpx":150,"cpy":100,"epx":225,"epy":225}]};
+	
+	$scope.templateData = {"program_name":"test_rpc","version":"1","methods":[],"data_structures":[],"canvasdata":{"rectangles":[{"x":50,"y":175,"l":50,"b":50},{"x":500,"y":175,"l":50,"b":50}],"lines":[]}};
 	
 	
 				
@@ -106,19 +45,23 @@ codeGeneratorApp.controller("MainCtrl", function($scope, $http, $location, $q, M
 	{
 		MainService.isInitialised=true;
 		
-		if(!$sessionService.getObject("user")) {
-			$location.path('/');
-		} else {
-			$location.path('/dashboard');
-			$scope.mainService.currentUser=$sessionService.getObject("user");
-	    	$scope.mainService.isUserLoggedIn=true;
-		}
-        /*if(!$scope.mainService.isUserLoggedIn){
-        	
-        	$location.path('/');
-        }*/
+		if(!$sessionService.getObject("data")) {
+			
+			$sessionService.setObject("data",$scope.templateData);
+			$scope.data=$sessionService.getObject("data");
+			
+		} else {			
+			$scope.data=$sessionService.getObject("data");
+			
+		}       
 	}
 	
+	$scope.reset = function() {
+		$sessionService.remove("data");
+		$sessionService.setObject("data",$scope.templateData);
+		$scope.data=$sessionService.getObject("data");
+		$scope.drawCanvas
+	};	
 	$scope.addMethod = function() {
 		
 		$scope.newMethod = {"parameters":[]};
@@ -127,12 +70,26 @@ codeGeneratorApp.controller("MainCtrl", function($scope, $http, $location, $q, M
 		        controller: 'ModalCtrl',
 		        scope: $scope
 		 });
-	};
+	};	
 	
+	$scope.setLines = function() {
+		$scope.data.line=[];
+  		for (var i = 0; i<$scope.data.methods.length; i++) {
+  			line = {};
+  	  		line.cpx=300;
+  	  		line.cpy = (400/($scope.data.methods.length+1))*(i+1);
+  	  		line.epx=525;
+  	  		line.epy=200;
+  	  		$scope.data.line.push(line); 	  		
+  		}
+  		
+  		$scope.drawCanvas();
+	};
 	
 	$scope.deleteMethod = function() {
 		
 		$scope.methodToDelete = {};
+		$scope.customStructureTypeToDelete = {};
 		$scope.uibModalInstance = $uibModal.open({
 		        templateUrl: 'resources/templates/deleteMethodModal.html',
 		        controller: 'ModalCtrl',
@@ -140,11 +97,16 @@ codeGeneratorApp.controller("MainCtrl", function($scope, $http, $location, $q, M
 		 });
 	};
 	
-
-	$scope.drawCurve = function() {
+	$scope.addCustomStructureType = function() {
 		
-		$scope.drawCanvas();
-	};
+		$scope.newCustomStructureType = {"members":[]};
+		$scope.uibModalInstance = $uibModal.open({
+		        templateUrl: 'resources/templates/addCustomStructureTypeModal.html',
+		        controller: 'ModalCtrl',
+		        scope: $scope
+		 });
+	};	
+
 	
 	$scope.drawCanvas = function(){
 		var canvas = document.getElementById('mycanvas');
@@ -166,10 +128,10 @@ codeGeneratorApp.controller("MainCtrl", function($scope, $http, $location, $q, M
 			context.stroke();
 		});
 	}
-	$scope.generateCode = function(){
+	
+	$scope.generateMethod = function(){
 			
-		$scope.data="";
-
+		
 		var result = $http({
 			method : 'POST',
 			url : 'generateCode',
@@ -178,7 +140,7 @@ codeGeneratorApp.controller("MainCtrl", function($scope, $http, $location, $q, M
 		result.success(function(data,status) {
 			if(data.result=="Success")
 		    {
-		    	alert('Method generated successfully !');
+		    	alert('Method generated successfully Stored at \n!'+data.path);
 		    	$uibModalInstance.close();
 		    }
 		    else
@@ -191,47 +153,4 @@ codeGeneratorApp.controller("MainCtrl", function($scope, $http, $location, $q, M
 			console.log('Error Occured in AJAX call with status :'+status);
 		});	
 	};	
-	
-	
-	
-});
-
-codeGeneratorApp.controller("ModalCtrl", function($scope,  $http, $uibModalInstance) {
-
-	$scope.cancel = function() {
-	    $uibModalInstance.dismiss();
-	};
-	
-	$scope.addParameter = function () {
-		$scope.newMethod.parameters.push({ 
-          name: "",
-          type: "",
-          namePlaceholder: "Enter Parameter name",
-          typePlaceholder: "Enter Parameter type"
-        });
-		alert("added parameter")
-      };
-      
-      $scope.removeParameter = function(idx) {
-    	  $scope.newMethod.parameters.splice(idx, 1);
-      };
-      
-      $scope.addMethod = function() {
-  		
-  		$scope.data.methods.push($scope.newMethod)
-  		alert("New Method Object :"+ angular.toJson($scope.newMethod));
-  		alert("Old global object :" + angular.toJson($scope.data));
-  		
-  		$uibModalInstance.close();
-  	};
-  	
-  	$scope.deleteMethod = function() {
-  		alert("Method to delete is : "+ angular.toJson($scope.methodToDelete));
-  		
-  		$uibModalInstance.close();
-  	
-  	};
-	
-
-	
 });

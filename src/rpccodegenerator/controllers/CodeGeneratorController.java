@@ -35,7 +35,8 @@ public class CodeGeneratorController {
 			jsonString = req.getReader().readLine();
 			System.out.println("Request object received : "+jsonString);
 			// Code to Generate RPC Files
-			return codeGeneratorService.generateCode(jsonString);	
+			String path = codeGeneratorService.generateCode(jsonString);
+			return "{\"result\": \"Success\"}";
 			
 		}catch (IOException e) {
 			e.printStackTrace();

@@ -157,6 +157,28 @@
 	    <artifactId>json-simple</artifactId>
 	    <version>1.1.1</version>
 	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/org.glassfish/javax.json -->
+<dependency>
+    <groupId>org.glassfish</groupId>
+    <artifactId>javax.json</artifactId>
+    <version>1.0.4</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/javax.json/javax.json-api -->
+<dependency>
+    <groupId>javax.json</groupId>
+    <artifactId>javax.json-api</artifactId>
+    <version>1.0</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.kamranzafar/jtar -->
+<dependency>
+    <groupId>org.kamranzafar</groupId>
+    <artifactId>jtar</artifactId>
+    <version>2.3</version>
+</dependency>
+
+
+
 	<!-- https://mvnrepository.com/artifact/org.javassist/javassist -->
 	<dependency>
 	    <groupId>org.javassist</groupId>

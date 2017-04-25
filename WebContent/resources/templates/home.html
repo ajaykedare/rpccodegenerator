@@ -1,24 +1,24 @@
 <div class="container">
 	<div id="leftPanel" class="panel panel-default" style="width:25%;float:left;padding:5px;height:100%">
-
-		<canvas id="canvas" width="200" height="200"
-			style="border: 1px solid #d3d3d3;">
-			<draw-circle x="50" y="50"></draw-circle>
-			<draw-circle x="50" y="50"></draw-circle>
-		</canvas>
+	
+		<input type="text" placeholder="Enter Program Name" ng-model="data.program_name">
+		<input type="text" placeholder="Enter Version" ng-model="data.version">
+		<br/>
+		<button type="button" class="btn btn-primary btn-block" ng-click="addMethod()">Add Method</button>
+		<button type="button" class="btn btn-primary btn-block" ng-click="addCustomStructureType()">Add Custom Structure</button>
+		<button type="button" class="btn btn-primary btn-block" ng-click="deleteMethod()">Delete Method/CustomStructure</button>
 		
-		<div> </div>
+		<br/> <br/>
+		<button type="button" class="btn btn-primary btn-block" ng-click="reset()">Reset</button>
+				
 	</div>
 	
 	
 	<div id="mainPanel" style="width:73%;float:left;padding:5px;height:100%">
-	<canvas id="mycanvas" style="border: 1px gray solid; float: left" width="600" height="400" ></canvas>
-		<div class="col-xs-8 text-center">
-			<button type="button" class="btn btn-primary btn-block" ng-click="drawCurve()">Draw Curve</button>
-			<button type="button" class="btn btn-primary btn-block" ng-click="addMethod()">Add Method</button>
-			<button type="button" class="btn btn-primary btn-block" ng-click="deleteMethod()">Delete Method</button>
+		<canvas id="mycanvas" style="border: 1px gray solid; float: left" width="600" height="400" ></canvas>
+		<br/>
+		<div class="col-xs-4 text-center">			
+			<button type="button" class="btn btn-primary btn-block" ng-click="generateMethod()">Generate RPC Code</button>
 		</div>	
 	</div>
-	
-	
 </div>

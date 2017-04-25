@@ -1,4 +1,4 @@
-package rpccodegenerator.authentication;
+package rpccodegenerator.rpcgenerator;
 /*
  * First create the keystore (to allow SSL protection) by importing the LDAP
  * certificate (cert.pem) with:
